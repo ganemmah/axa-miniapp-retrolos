@@ -1,0 +1,16 @@
+# Secrets - never commit actual values
+.env
+.env.*
+!.env.example
+
+# OS / editor
+.DS_Store
+Thumbs.db
+.idea/
+.vscode/
+
+# Local scratch
+*.log
+
+# Node (tests run without install, but never commit these)
+node_modules/

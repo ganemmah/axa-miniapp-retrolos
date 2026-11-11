@@ -1,0 +1,62 @@
+{
+  "$comment": "Mini-app profile, a proposal for the governance framework of «AXA Mini Apps – Citizen Development Boost Factory» (AXA LOS!). Not an official AXA schema.",
+  "profileVersion": "0.3",
+  "id": "axa-miniapp-retrolos",
+  "name": "RetroBoard Lite",
+  "version": "0.1.0",
+  "purpose": "Digital sticky-note wall for sprint retrospectives: collect notes in three columns (good / bad / change), vote, discuss one note large, copy the result.",
+  "audience": "Scrum masters, team leads and every team that regularly looks back on how it works together",
+  "benefit": "Replaces external online retro tools, where internal topics end up with third-party providers (shadow IT).",
+  "owner": {
+    "role": "Scrum master (business owner)",
+    "deputy": "Agile coach or a second scrum master (to be named)",
+    "team": "ZHAW team, business information systems (prototype)",
+    "event": "AXA hackathon, 10/11 November 2026",
+    "repository": "https://github.com/ganemmah/axa-miniapp-retrolos"
+  },
+  "status": "prototype",
+  "riskLevel": {
+    "level": "low",
+    "reason": "No personal or customer data, no server, no network access, no login. Everything stays in the browser of the person moderating.",
+    "risesWhen": [
+      "several people should write at the same time from their own devices (needs a server or shared storage, e.g. Teams Live Share in the AXA tenant)",
+      "content is sent to other systems (e.g. Jira, Confluence, e-mail)",
+      "an AI should summarise the notes (texts go to a service)"
+    ]
+  },
+  "lifecycle": {
+    "created": "2026-11-10",
+    "nextReview": "2027-05-10",
+    "reviewInterval": "every six months",
+    "decommission": "Archive the repository and disable GitHub Pages. There is no server-side data to delete."
+  },
+  "data": {
+    "classification": "internal (team topics, no customer data)",
+    "personalData": false,
+    "customerData": false,
+    "healthData": false,
+    "serverSideStorage": false,
+    "storage": "Only in the browser of the person moderating (localStorage). «Neue Retro» deletes everything.",
+    "noticeInApp": "Bitte keine Kunden- oder Personendaten eintragen."
+  },
+  "networkAccess": "none (loads only files of its own site; enforced by the Content-Security-Policy default-src 'self')",
+  "dependencies": [],
+  "ai": "none in the app; built with AI assistance following AGENTS.md",
+  "hosting": {
+    "platform": "GitHub Pages (static)",
+    "url": "https://ganemmah.github.io/axa-miniapp-retrolos/",
+    "deployment": "GitHub Actions (.github/workflows/deploy.yml), only after green tests",
+    "target": "Static hosting on an AXA-internal platform for mini apps"
+  },
+  "security": {
+    "contentSecurityPolicy": "default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'",
+    "login": false,
+    "secrets": "none",
+    "checkedAutomatically": "tests/guardrails.test.js: CSP, classic deferred scripts, no inline code, relative paths, no external URLs, no network access, no HTML strings, colour tokens, dark mode, profile complete"
+  },
+  "quality": {
+    "tests": "node --test (no test framework, no package.json)",
+    "scope": "board logic, votes, sorting, card numbers, summary, timer, saved data, guardrails, profile"
+  },
+  "limits": "One person operates the app (screen sharing). No sync between devices, no login, no connection to other systems."
+}

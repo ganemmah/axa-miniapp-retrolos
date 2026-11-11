@@ -1,0 +1,98 @@
+<!doctype html>
+<html lang="de-CH">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta http-equiv="Content-Security-Policy" content="default-src 'self'; img-src 'self' data:; object-src 'none'; base-uri 'self'; form-action 'self'">
+  <meta name="referrer" content="no-referrer">
+  <meta name="robots" content="noindex">
+  <meta name="description" content="RetroBoard Lite – digitale Post-it-Wand für Sprint-Retrospektiven. Hackathon-Prototyp, alle Daten bleiben im Browser.">
+  <title>RetroBoard Lite</title>
+  <link rel="icon" href="favicon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="styles.css">
+  <script src="retro-core.js" defer></script>
+  <script src="app.js" defer></script>
+</head>
+<body>
+  <a class="skip-link" href="#main">Zum Inhalt springen</a>
+
+  <div class="banner" role="note">
+    <strong>Hackathon-Prototyp – keine offizielle AXA-Anwendung</strong>
+  </div>
+
+  <header class="site-header">
+    <div class="site-header-inner">
+      <span class="brand-mark" aria-hidden="true">RB</span>
+      <h1 class="brand-name">RetroBoard <span class="brand-lite">Lite</span></h1>
+    </div>
+  </header>
+
+  <main id="main" class="page" tabindex="-1">
+    <noscript>
+      <p class="noscript">Zum Erfassen von Zetteln, zum Abstimmen und für den Timer braucht RetroBoard Lite JavaScript. Bitte JavaScript aktivieren.</p>
+    </noscript>
+
+    <section class="toolbar" aria-label="Titel und Timer">
+      <div class="toolbar-title">
+        <label for="title" class="visually-hidden">Titel der Retro (optional)</label>
+        <input id="title" type="text" maxlength="60" autocomplete="off" placeholder="Titel, z. B. Sprint 42 (optional)">
+      </div>
+      <div id="timer" class="timer timer-ready" role="group" aria-label="Timer">
+        <span id="timer-display" class="timer-display" role="timer">05:00</span>
+        <div class="timer-choices" role="group" aria-label="Dauer">
+          <button type="button" class="chip" id="timer-3" data-minutes="3" aria-pressed="false">3 Min.</button>
+          <button type="button" class="chip" id="timer-5" data-minutes="5" aria-pressed="true">5 Min.</button>
+          <button type="button" class="chip" id="timer-10" data-minutes="10" aria-pressed="false">10 Min.</button>
+        </div>
+        <button type="button" class="button button-small button-primary" id="timer-start">▶ Start</button>
+        <button type="button" class="button button-small" id="timer-reset" title="Timer zurücksetzen" aria-label="Timer zurücksetzen">↺</button>
+        <button type="button" class="button button-small" id="sound" aria-pressed="true" title="Gong am Timer-Ende ist an" aria-label="Gong am Timer-Ende">🔔</button>
+      </div>
+    </section>
+
+    <div class="board">
+      <section class="column note-good" aria-labelledby="heading-good">
+        <h2 id="heading-good" class="column-title">Was lief gut?</h2>
+        <form class="card-form" data-column="good">
+          <label for="new-good" class="visually-hidden">Neue Karte: Was lief gut?</label>
+          <input id="new-good" name="text" type="text" maxlength="200" autocomplete="off" placeholder="Tippen und Enter drücken">
+        </form>
+        <ul id="cards-good" class="cards"></ul>
+      </section>
+
+      <section class="column note-bad" aria-labelledby="heading-bad">
+        <h2 id="heading-bad" class="column-title">Was lief schlecht?</h2>
+        <form class="card-form" data-column="bad">
+          <label for="new-bad" class="visually-hidden">Neue Karte: Was lief schlecht?</label>
+          <input id="new-bad" name="text" type="text" maxlength="200" autocomplete="off" placeholder="Tippen und Enter drücken">
+        </form>
+        <ul id="cards-bad" class="cards"></ul>
+      </section>
+
+      <section class="column note-change" aria-labelledby="heading-change">
+        <h2 id="heading-change" class="column-title">Was machen wir anders?</h2>
+        <form class="card-form" data-column="change">
+          <label for="new-change" class="visually-hidden">Neue Karte: Was machen wir anders?</label>
+          <input id="new-change" name="text" type="text" maxlength="200" autocomplete="off" placeholder="Tippen und Enter drücken">
+        </form>
+        <ul id="cards-change" class="cards"></ul>
+      </section>
+    </div>
+
+    <div class="actions">
+      <button type="button" class="button" id="sort">Nach Stimmen sortieren</button>
+      <button type="button" class="button button-primary" id="copy">Ergebnis kopieren</button>
+      <button type="button" class="button" id="new-retro">Neue Retro</button>
+    </div>
+
+    <p id="notice" class="notice" role="note">Bitte keine Kunden- oder Personendaten eintragen. Alles bleibt nur in diesem Browser.</p>
+  </main>
+
+  <footer class="site-footer">
+    <p>RetroBoard Lite · ZHAW-Team · AXA-Hackathon 2026 · Kein Server, kein Login: Alle Daten bleiben in diesem Browser.</p>
+  </footer>
+
+  <dialog id="zoom" class="zoom" aria-labelledby="zoom-text"></dialog>
+  <div id="toast" class="toast" role="status" aria-live="polite"></div>
+</body>
+</html>
